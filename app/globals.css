@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .sliding-div {
+    transition: height 0.25s;
+    overflow: hidden;
+  }
+}
+
+body {
+  background-image: url(../images/bg.png);
+}
+
+html {
+  height: 100%;
+}
