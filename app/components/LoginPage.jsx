@@ -1,23 +1,26 @@
 "use client";
 
-import { FormEvent } from 'react'
-
 import { useState } from 'react';
+import axios from 'axios';
 
 export default function LoginPage({}) {
 
-  const [fade, setFade] = useState();
+  const [accessToken, setAccessToken] = useState();
+  const [isFailed, setIsFailed] = useState();
 
-  const handleSubmit = async () => {
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    console.log(event);
+    console.log(event.target.elements.login.value)
+    const userData = {login: event.target.elements.login.value, password: event.target.elements.password.value}
 
-    const userData ={'login': '', 'password': ''}
+    await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/login', {userData})
+      .then(res => {
+        if (res.data.exists === true) {
+          setAccessToken(res.data.accessToken);
 
-    await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/login', {userData: JSON.stringify(userData)}, {
-      onUploadProgress: (progressEvent) => {
-        const progress = (progressEvent.loaded / progressEvent.total);
-        setProgress(progress);
-      }})
-      .then(res => setFileUuid(res.data.fileUuid))
+        }
+      })
       .catch(err => {
         setIsFailed(true);
         console.error(err);
@@ -25,7 +28,7 @@ export default function LoginPage({}) {
   };
 
   return(
-      <div className='w-96 h-60 place-self-center grid
+      <div className='w-96 h-60 mb-12 place-self-center grid
       bg-neutral-900/50
       border-dashed border-2 border-fuchsia-200 rounded-lg'>
         <form onSubmit={handleSubmit} className='grid place-self-center w-full
@@ -42,13 +45,13 @@ export default function LoginPage({}) {
             placeholder='Password'
             name='password'
             type='password'/>    
-          <div className='h-12 w-10/12 pl-2 mt-6 grid place-self-center
+          <button className='h-12 w-10/12 pl-2 mt-6 grid place-self-center
           bg-neutral-900 hover:bg-neutral-800/75 active:bg-neutral-700/75 font-sans text-xl text-neutral-200 
           border-solid border-2 border-fuchsia-900 rounded-md outline-none '>
             <p className='place-self-center
             font-sans text-xl text-neutral-200'>
               Sign in</p>
-          </div>
+          </button >
         </form>              
       </div>
   ) 
