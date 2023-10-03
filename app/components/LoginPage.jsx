@@ -1,10 +1,11 @@
-"use client";
+'use client';
 
 import { useState } from 'react';
 import { useEffect } from 'react';
 import axios from 'axios';
 import { setCookie } from "cookies-next";
 import { hasCookie } from 'cookies-next';
+import { getCookie } from "cookies-next";
 import { redirect } from 'next/navigation'
 
 export default function LoginPage({}) {
@@ -14,7 +15,7 @@ export default function LoginPage({}) {
 
   useEffect(() => {
     if (hasCookie('user') || isSuccess) {
-      redirect('/panel'); 
+      redirect('/panel/status'); 
     }
   });
 
@@ -26,8 +27,9 @@ export default function LoginPage({}) {
       .then(res => {
         if (res.data.exists === true) {
           setCookie('user', ({login: event.target.elements.login.value, accessToken: res.data.accessToken}), 
-          { sameSite: true, path: '/', maxAge: 10 });   
-          console.log(hasCookie('user'));   
+          { sameSite: true, path: '/', maxAge: 30 });   
+          console.log(hasCookie('user')); 
+          console.log(getCookie('user'));  
           setIsSuccess(true);
         }
       })
