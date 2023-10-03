@@ -6,16 +6,18 @@ import axios from 'axios';
 import { setCookie } from "cookies-next";
 import { hasCookie } from 'cookies-next';
 import { getCookie } from "cookies-next";
-import { redirect } from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 export default function LoginPage({}) {
 
   const [isFailed, setIsFailed] = useState();
   const [isSuccess, setIsSuccess] = useState();
 
+  const router = useRouter();
+
   useEffect(() => {
     if (hasCookie('user') || isSuccess) {
-      redirect('/panel/status'); 
+      router.push('/panel/status');
     }
   });
 
@@ -27,7 +29,7 @@ export default function LoginPage({}) {
       .then(res => {
         if (res.data.exists === true) {
           setCookie('user', ({login: event.target.elements.login.value, accessToken: res.data.accessToken}), 
-          { sameSite: true, path: '/', maxAge: 30 });   
+          { sameSite: true, path: '/', maxAge: 20 });   
           console.log(hasCookie('user')); 
           console.log(getCookie('user'));  
           setIsSuccess(true);

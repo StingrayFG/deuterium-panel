@@ -6,13 +6,16 @@ import axios from 'axios';
 import { hasCookie } from 'cookies-next';
 import { getCookie } from "cookies-next";
 
-export default function LoginPage({}) {
+export default function StatusPage({initial}) {
 
   const [isFailed, setIsFailed] = useState();
+  const [Status, setStatus] = useState();
+
+  const cookie = getCookie('myCookie')?.toString()
 
   useEffect(() => {
-    console.log(hasCookie('user'));
-    console.log(getCookie('user'));
+    console.log(cookie);
+    console.log(initial);
     if (hasCookie('user')) {
 
       const headers = { 'Authorization': `Bearer ${JSON.parse(getCookie('user')).accessToken}` };
@@ -29,7 +32,7 @@ export default function LoginPage({}) {
 
   return (
     <div>
-      
+      <p>{cookie ?? initial}</p>
     </div>
   ) 
   
