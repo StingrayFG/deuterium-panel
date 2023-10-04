@@ -2,9 +2,9 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { cookies } from 'next/headers'
 
-import LogoutIcon from '/icons/LogoutIcon.jsx';
-import StatusIcon from '/icons/StatusIcon.jsx';
-import FileManagementIcon from '/icons/FileManagementIcon.jsx';
+import logoutIcon from '/icons/logout-icon.svg';
+import statusIcon from '/icons/status-icon.svg';
+import fileManagementIcon from '/icons/file-management-icon.svg';
 
 export default function NavBar() {
   const cookie = cookies().get('user')?.value
@@ -20,22 +20,21 @@ export default function NavBar() {
             {cookie ? JSON.parse(cookie).login : null}
           </p>  
           <button className='w-1/12 self-center'>
-            <LogoutIcon className='self-center ml-4'/>
+            <Image src={logoutIcon} width={24} height={24} alt='logoutIcon' className='self-center'/>
           </button>
-        </div>
-        
+        </div>   
       </div>
 
       <div className='w-full mt-4 border-dashed border-2 border-fuchsia-200 rounded-lg bg-neutral-900'>
         <div className='w-11/12 h-auto mb-4 mx-auto grid'>
           <Link href="/panel/status" className='mt-2 flex'>
-            <StatusIcon className='self-center'/>
+            <Image src={statusIcon} width={24} height={24} alt='statusIcon' className='self-center'/>
             <p className='ml-2 self-center'>
               Status
             </p>  
           </Link>  
           <Link href="/panel/status" className='mt-2 flex'>
-            <FileManagementIcon className='self-center'/>
+            <Image src={fileManagementIcon} width={24} height={24} alt='fileManagementIcon' lassName='self-center'/>
             <p className='ml-2 self-center'>
               File Management
             </p>  
