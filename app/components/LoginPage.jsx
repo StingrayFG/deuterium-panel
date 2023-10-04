@@ -29,7 +29,7 @@ export default function LoginPage({}) {
       .then(res => {
         if (res.data.exists === true) {
           setCookie('user', ({login: event.target.elements.login.value, accessToken: res.data.accessToken}), 
-          { sameSite: true, path: '/', maxAge: 20 });   
+          { sameSite: true, path: '/', maxAge: 3600 });   
           console.log(hasCookie('user')); 
           console.log(getCookie('user'));  
           setIsSuccess(true);
