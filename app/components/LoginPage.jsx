@@ -1,22 +1,27 @@
 'use client';
 
-import { useState } from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { setCookie } from "cookies-next";
-import { hasCookie } from 'cookies-next';
-import { getCookie } from "cookies-next";
+import { setCookie, getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation'
 
-export default function LoginPage({}) {
+export default function LoginPage({initial}) {
+  const router = useRouter();
+  var cookie = initial ?? getCookie('user')?.toString()
 
-  const [isFailed, setIsFailed] = useState();
+  const [forceRefresh, setForceRefresh] = useState();
   const [isSuccess, setIsSuccess] = useState();
 
-  const router = useRouter();
+  useEffect(() => {
+    if (!forceRefresh) {
+      setForceRefresh(true);
+      router.refresh();
+    }
+  })
 
   useEffect(() => {
-    if (hasCookie('user') || isSuccess) {
+    cookie = initial ?? getCookie('user')?.toString()
+    if (cookie || isSuccess) {
       router.push('/panel/status');
     }
   });
@@ -29,9 +34,7 @@ export default function LoginPage({}) {
       .then(res => {
         if (res.data.exists === true) {
           setCookie('user', ({login: event.target.elements.login.value, accessToken: res.data.accessToken}), 
-          { sameSite: true, path: '/', maxAge: 3600 });   
-          console.log(hasCookie('user')); 
-          console.log(getCookie('user'));  
+          { sameSite: true, path: '/', maxAge: 10 });   
           setIsSuccess(true);
         }
       })
