@@ -2,31 +2,20 @@
 
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { setCookie, getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation'
 
-export default function LoginPage({initial}) {
+export default function LoginPage() {
   const router = useRouter();
-  var cookie = initial ?? getCookie('user')?.toString()
-
-  const [forceRefresh, setForceRefresh] = useState();
-
-  useEffect(() => {
-    if (!forceRefresh) {
-      setForceRefresh(true);
-      router.refresh();
-    }
-  })
+  const userData = sessionStorage.getItem('user')
 
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    const userData = {login: event.target.elements.login.value, password: event.target.elements.password.value}
-    await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/login', {userData})
+    const formUserData = {login: event.target.elements.login.value, password: event.target.elements.password.value}
+    await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/login', {userData: formUserData})
       .then(res => {
         if (res.data.exists === true) {
-          setCookie('user', ({login: event.target.elements.login.value, accessToken: res.data.accessToken}), 
-          { sameSite: true, path: '/', maxAge: 10 });   
+          sessionStorage.setItem('user', JSON.stringify({login: event.target.elements.login.value, accessToken: res.data.accessToken}));
           router.replace('/panel/status');
         }
       })
@@ -36,7 +25,7 @@ export default function LoginPage({initial}) {
       });
   };
 
-  if (!cookie) {
+  if (!userData) {
     return (
       <div className='w-96 h-60 mb-12 place-self-center grid
       bg-neutral-900/50

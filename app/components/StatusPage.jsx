@@ -3,7 +3,6 @@
 import Image from 'next/image'
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { getCookie } from 'cookies-next';
 import { useRouter } from 'next/navigation'
 
 import uptimeIcon from '/icons/uptime-icon.svg';
@@ -15,20 +14,12 @@ const { version } = require('/package.json');
 export default function StatusPage({initial}) {
   const router = useRouter();
   const date = new Date(0);
-  const cookie = initial ?? getCookie('user')?.toString()
+  const userData = sessionStorage.getItem('user')
 
-  const [forceRefresh, setForceRefresh] = useState();
   const [status, setStatus] = useState();
   const [time, setTime] = useState(0);
 
   useEffect(() => {
-    if (!forceRefresh) { // initial refresh
-      setForceRefresh(true);
-      router.refresh();
-    }
-  })
-
-  useEffect(() => { // update time state
     let interval = null;
     interval = setInterval(() => {
       setTime((time) => time + 1);
@@ -36,26 +27,10 @@ export default function StatusPage({initial}) {
     return () => clearInterval(interval);
   })
 
-  useEffect(() => { // logout if cookies have expired
-    let interval = null;
-    interval = setInterval(() => {
-      router.refresh();
-    }, 30000);
-    return () => clearInterval(interval);
-  })
-
   useEffect(() => {
-    console.log(initial)
-    console.log(getCookie('user')?.toString())
-    if (!cookie) {
-      router.push('/');
-    }
-  });
-  
-  useEffect(() => {
-    if (cookie && (!status)) {
+    if (userData && (!status)) {
 
-      const headers = { 'Authorization': `Bearer ${JSON.parse(cookie).accessToken}` };
+      const headers = { 'Authorization': `Bearer ${JSON.parse(userData).accessToken}` };
       axios.get(process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/status', {headers})
         .then(res => {
           setStatus(res.data.status);     
@@ -66,7 +41,7 @@ export default function StatusPage({initial}) {
     };
   });
 
-  if (status && cookie) {
+  if (status && userData) {
     date.setSeconds(+status.uptime + +time); 
     return (
       <div className='w-4/5 h-5/6 float-right'> 
@@ -96,7 +71,7 @@ export default function StatusPage({initial}) {
         </div>
       </div>
     ) 
-  } else if (!cookie) {
+  } else if (!userData) {
     router.replace('/');
   } else {
     null

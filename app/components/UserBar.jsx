@@ -1,12 +1,18 @@
+'use client';
+
 import Image from 'next/image';
-import { cookies } from 'next/headers'
+import { useRouter } from 'next/navigation'
 
-import LogOutButton from './LogOutButton';
-
-export const dynamic = "force-dynamic";
+import logoutIcon from '/icons/logout-icon.svg';
 
 export default function UserBar() {
-  const cookie = cookies().get('user')?.value
+  const router = useRouter();
+  const userData = sessionStorage.getItem('user')
+
+  const logOut = () => {
+    sessionStorage.removeItem('user');
+    router.replace('/');
+  };
 
   return (
     <div className='w-1/5 h-auto ml-6 mt-20 absolute
@@ -16,9 +22,11 @@ export default function UserBar() {
         border-solid border-2 border-fuchsia-900 rounded-lg'>
         <div className='w-11/12 h-full ml-4 flex'> 
           <p className='w-11/12 self-center'>
-            {cookie ? JSON.parse(cookie).login : null}
+            {JSON.parse(userData).login}
           </p>  
-          <LogOutButton />
+          <button className='w-1/12 self-center' onClick={logOut}>
+            <Image src={logoutIcon} width={24} height={24} alt='logoutIcon' className='self-center'/>
+          </button>
         </div>   
       </div>
     </div>
