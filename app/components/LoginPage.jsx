@@ -10,7 +10,6 @@ export default function LoginPage({initial}) {
   var cookie = initial ?? getCookie('user')?.toString()
 
   const [forceRefresh, setForceRefresh] = useState();
-  const [isSuccess, setIsSuccess] = useState();
 
   useEffect(() => {
     if (!forceRefresh) {
@@ -18,13 +17,6 @@ export default function LoginPage({initial}) {
       router.refresh();
     }
   })
-
-  useEffect(() => {
-    cookie = initial ?? getCookie('user')?.toString()
-    if (cookie || isSuccess) {
-      router.push('/panel/status');
-    }
-  });
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -35,7 +27,7 @@ export default function LoginPage({initial}) {
         if (res.data.exists === true) {
           setCookie('user', ({login: event.target.elements.login.value, accessToken: res.data.accessToken}), 
           { sameSite: true, path: '/', maxAge: 10 });   
-          setIsSuccess(true);
+          router.replace('/panel/status');
         }
       })
       .catch(err => {
@@ -44,33 +36,38 @@ export default function LoginPage({initial}) {
       });
   };
 
-  return (
-    <div className='w-96 h-60 mb-12 place-self-center grid
-    bg-neutral-900/50
-    border-dashed border-2 border-fuchsia-200 rounded-lg'>
-      <form onSubmit={handleSubmit} className='grid place-self-center w-full
-      border-dashed border-2 border-transparent rounded-lg'>
-        <input className='h-12 w-10/12 pl-2 place-self-center
-        bg-neutral-700 font-sans text-xl text-neutral-200
-        border-solid border-2 border-fuchsia-900 rounded-md outline-none '
-          placeholder='Login'
-          name='login'
-          type='text'/>
-        <input className='h-12 w-10/12 pl-2 mt-2 place-self-center
-        bg-neutral-700 font-sans text-xl text-neutral-200
-        border-solid border-2 border-fuchsia-900 rounded-md outline-none '
-          placeholder='Password'
-          name='password'
-          type='password'/>    
-        <button className='h-12 w-10/12 pl-2 mt-6 grid place-self-center
-        bg-neutral-900 hover:bg-neutral-800/75 active:bg-neutral-700/75 font-sans text-xl text-neutral-200 
-        border-solid border-2 border-fuchsia-900 rounded-md outline-none '>
-          <p className='place-self-center
-          font-sans text-xl text-neutral-200'>
-            Sign in</p>
-        </button >
-      </form>              
-    </div>
-  ) 
+  if (!cookie) {
+    return (
+      <div className='w-96 h-60 mb-12 place-self-center grid
+      bg-neutral-900/50
+      border-dashed border-2 border-fuchsia-200 rounded-lg'>
+        <form onSubmit={handleSubmit} className='grid place-self-center w-full
+        border-dashed border-2 border-transparent rounded-lg'>
+          <input className='h-12 w-10/12 pl-2 place-self-center
+          bg-neutral-700 font-sans text-xl text-neutral-200
+          border-solid border-2 border-fuchsia-900 rounded-md outline-none '
+            placeholder='Login'
+            name='login'
+            type='text'/>
+          <input className='h-12 w-10/12 pl-2 mt-2 place-self-center
+          bg-neutral-700 font-sans text-xl text-neutral-200
+          border-solid border-2 border-fuchsia-900 rounded-md outline-none '
+            placeholder='Password'
+            name='password'
+            type='password'/>    
+          <button className='h-12 w-10/12 pl-2 mt-6 grid place-self-center
+          bg-neutral-900 hover:bg-neutral-800/75 active:bg-neutral-700/75 font-sans text-xl text-neutral-200 
+          border-solid border-2 border-fuchsia-900 rounded-md outline-none '>
+            <p className='place-self-center
+            font-sans text-xl text-neutral-200'>
+              Sign in</p>
+          </button >
+        </form>              
+      </div>
+    ) 
+  } else {
+    router.replace('/panel/status');
+  }
+  
   
 }

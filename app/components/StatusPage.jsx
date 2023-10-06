@@ -22,17 +22,25 @@ export default function StatusPage({initial}) {
   const [time, setTime] = useState(0);
 
   useEffect(() => {
-    if (!forceRefresh) {
+    if (!forceRefresh) { // initial refresh
       setForceRefresh(true);
       router.refresh();
     }
   })
 
-  useEffect(() => {
+  useEffect(() => { // update time state
     let interval = null;
     interval = setInterval(() => {
       setTime((time) => time + 1);
     }, 1000);
+    return () => clearInterval(interval);
+  })
+
+  useEffect(() => { // logout if cookies have expired
+    let interval = null;
+    interval = setInterval(() => {
+      router.refresh();
+    }, 30000);
     return () => clearInterval(interval);
   })
 
@@ -58,16 +66,16 @@ export default function StatusPage({initial}) {
     };
   });
 
-  if (status) {
+  if (status && cookie) {
     date.setSeconds(+status.uptime + +time); 
     return (
-      <div className='w-4/5 h-5/6 right-0 absolute'> 
+      <div className='w-4/5 h-5/6 float-right'> 
         <div className='h-full ml-12 mr-6 mt-20
           bg-neutral-900 border-solid border-2 border-fuchsia-900 rounded-lg
           text-neutral-200 text-2xl'>    
-          <div className='ml-4'>
-            <p className='mt-2 text-4xl'>Status</p>
-            <div className='mt-6 mr-6 border-dashed border-t-2 border-neutral-200 border-top'></div>
+          <div className='ml-6 mr-6'>
+            <p className='mt-4 text-4xl'>Status</p>
+            <div className='mt-6 border-dashed border-t-2 border-neutral-200 border-top'></div>
             
             <p className='mt-6'>deuterium-panel v{version}</p>
             <p className='mt-2'>deuterium v{status.version}</p>
@@ -88,6 +96,8 @@ export default function StatusPage({initial}) {
         </div>
       </div>
     ) 
+  } else if (!cookie) {
+    router.replace('/');
   } else {
     null
   }
