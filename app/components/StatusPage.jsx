@@ -74,7 +74,7 @@ export default function StatusPage({initial}) {
 
             <div className='flex mt-6'>
               <Image src={uptimeIcon} width={24} height={24} alt='uptimeIcon' className='self-center'/>
-              <p className='ml-2'>{Math.floor(date.getSeconds() / 86400) + ':' + date.toISOString().slice(11, 19)}</p>
+              <p className='ml-2'>{Math.floor(date.getTime() / (86400 * 1000)) + ':' + date.toISOString().slice(11, 19)}</p>
             </div>        
             <div className='flex mt-2'>
               <Image src={filesSizeIcon} width={24} height={24} alt='filesSizeIcon' className='self-center'/>
