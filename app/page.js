@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image'
 import Link from 'next/link';
 
-import LoginPage from 'components/LoginPage';
+import LoginPage from 'components/LoginPage/LoginPage';
 
 import githubMark from '/images/github-mark-white.png';
 import logo from '/images/logo-white.png';

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import NavBar from 'components/NavBar';
-import UserBar from 'components/UserBar';
+import NavBar from 'components/Layout/NavBar';
+import UserBar from 'components/Layout/UserBar';
 
 import 'globals.css'
 

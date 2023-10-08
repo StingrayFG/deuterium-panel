@@ -11,7 +11,7 @@ import filesCountIcon from '/icons/files-count-icon.svg';
 
 const { version } = require('/package.json');
 
-export default function StatusPage({initial}) {
+export default function StatusPage({}) {
   const router = useRouter();
   const date = new Date(0);
   const userData = sessionStorage.getItem('user')
@@ -44,13 +44,13 @@ export default function StatusPage({initial}) {
   if (status && userData) {
     date.setSeconds(+status.uptime + +time); 
     return (
-      <div className='w-4/5 h-5/6 float-right'> 
-        <div className='h-full ml-12 mr-6 mt-20
+      <div className='w-full md:w-4/5 pt-20 pb-20 ml-auto'> 
+        <div className='h-auto ml-6 md:ml-12 mr-6 pb-12
           bg-neutral-900 border-solid border-2 border-fuchsia-900 rounded-lg
-          text-neutral-200 text-2xl'>    
+          text-neutral-200 text-xl'>    
           <div className='ml-6 mr-6'>
             <p className='mt-4 text-4xl'>Status</p>
-            <div className='mt-6 border-dashed border-t-2 border-neutral-200 border-top'></div>
+            <div className='mt-6 border-solid border-t-2 border-neutral-200 border-top'></div>
             
             <p className='mt-6'>deuterium-panel v{version}</p>
             <p className='mt-2'>deuterium v{status.version}</p>
