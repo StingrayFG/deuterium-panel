@@ -10,7 +10,7 @@ module.exports = {
       },
     },
     screens: {
-      'md': '870px',
+      'md': '1200px',
     },
   },
   plugins: [],
