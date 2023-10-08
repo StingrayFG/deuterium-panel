@@ -7,7 +7,7 @@ import fileManagementIcon from '/icons/file-management-icon.svg';
 export default function NavBar() {
 
   return (
-    <div className='w-1/5 h-auto ml-6 mt-36 absolute
+    <div className='w-1/5 h-auto ml-6 pt-36 absolute
     text-neutral-200 text-2xl'>
       <div className='w-full mt-0 border-dashed border-2 border-neutral-200 rounded-lg bg-neutral-900/50'>
         <div className='w-11/12 h-auto mb-4 ml-4 grid'>
@@ -17,7 +17,7 @@ export default function NavBar() {
               Status
             </p>  
           </Link>  
-          <Link href="/panel/" className='mt-2 flex'>
+          <Link href="/panel/files" className='mt-2 flex'>
             <Image src={fileManagementIcon} width={24} height={24} alt='fileManagementIcon' className='self-center'/>
             <p className='ml-2 self-center'>
               File Management
