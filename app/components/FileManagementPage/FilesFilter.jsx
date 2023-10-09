@@ -18,45 +18,35 @@ export default function FilesFilter({handleSubmit, handleHashSubmit}) {
 
   if (userData) {
     return (
-      <div className='w-full h-auto mt-6 place-self-center'>
-        <div className={`w-full h-auto overflow-hidden text-xl
+      <div className='w-full mt-6 place-self-center'>
+        <div className={`w-full overflow-hidden text-xl
         border-solid border-2 border-neutral-200 rounded-lg
-        transition-all duration-250 ${isMinimized ? 'max-h-0 mb-0 opacity-0': 'max-h-max mb-2 opacity-100'}`}>
+        transition-all duration-500 ${isMinimized ? 'opacity-0 max-h-0' : 'mb-2 opacity-100 max-h-screen'}`}>
           <form onSubmit={handleSubmit} className='h-auto mt-0 pb-0 place-self-center w-full'>
 
             <div className='w-full pl-4'>
-              <div className='h-auto w-full mt-0 md:mt-4 grid md:flex'>
-                <label className='h-6 mt-2 w-24 font-semibold'>Name</label>
+              <div className='w-full mt-0 md:mt-4 grid md:flex'>
+                <label className='h-6 mt-2 w-32 font-semibold'>Filename</label>
                 <input className='h-10 pl-2 pr-2 mr-4 grow
                 bg-neutral-700 text-lg
                 border-solid border-2 border-neutral-200 rounded-md outline-none '
-                  placeholder='* Matches any number of characters. E.g "abc*"'
+                  placeholder=''
                   name='name'
                   type='text'/>
               </div>
-            
-              <div className='h-auto w-full mt-2 grid md:flex'>
-                <label className='h-6 mt-2 w-24 font-semibold'>Format</label>
-                <input className='h-10 pl-2 pr-2 mr-4 grow
-                bg-neutral-700 text-lg
-                border-solid border-2 border-neutral-200 rounded-md outline-none '
-                  placeholder='Use space to specify more than one. E.g ".png .jpeg"'
-                  name='format'
-                  type='text'/>
-              </div>
 
-              <div className='h-auto w-full mt-2 grid md:flex'>
-                <label className='h-6 mt-2 w-24 font-semibold'>IP</label>
+              <div className='w-full mt-2 grid md:flex'>
+                <label className='h-6 mt-2 w-32 font-semibold'>Upload IP</label>
                 <input className='h-10 pl-2 pr-2 mr-4 grow
                 bg-neutral-700 text-lg 
                 border-solid border-2 border-neutral-200 rounded-md outline-none '
-                  placeholder='* Matches any number of characters. E.g "127.0.*"'
+                  placeholder=''
                   name='ip'
                   type='text'/>
               </div> 
 
-              <div className='h-auto w-full mt-2 grid md:flex h-max'>
-                <label className='h-6 mt-2 w-24 font-semibold'>Date</label>
+              <div className='w-full mt-2 grid md:flex h-max'>
+                <label className='h-6 mt-2 w-32 font-semibold'>Upload date</label>
                 <div className='mr-4 md:flex grow'>
                   <input className='h-10 w-full md:w-1/2 pl-2 pr-2
                       bg-neutral-700 text-lg
@@ -70,6 +60,17 @@ export default function FilesFilter({handleSubmit, handleHashSubmit}) {
                         name='dateto'
                         type='date'/>
                 </div>        
+              </div> 
+
+              <div className='w-full mt-2 grid md:flex'>
+                <label className='h-6 mt-2 w-32 font-semibold'>Max results</label>
+                <input className='h-10 pl-2 pr-3 mr-4 grow
+                bg-neutral-700 text-lg 
+                border-solid border-2 border-neutral-200 rounded-md outline-none'
+                  name='maxresults'
+                  type='number'
+                  min='5' max='50'
+                  defaultValue = '5'/>
               </div> 
 
               <div className='w-full mt-2 grid md:flex h-max'> 
@@ -92,11 +93,11 @@ export default function FilesFilter({handleSubmit, handleHashSubmit}) {
           border-dashed border-0 border-neutral-200 rounded-lg'>
             <div className='w-full pl-4'>
               <div className='h-auto w-full mt-0 md:mt-4 grid md:flex'>
-                <label className='h-6 mt-2 w-24 font-semibold'>Hashsum</label>
+                <label className='h-6 mt-2 w-32 font-semibold'>Hashsum</label>
                 <input required='required' className='h-10 pl-2 pr-2 mr-4 grow
                 bg-neutral-700 text-lg
                 border-solid border-2 border-neutral-200 rounded-md outline-none '
-                  placeholder='* Matches any number of characters. E.g "abc*"'
+                  placeholder=''
                   name='hashsum'
                   type='text'/>
               </div>
@@ -121,10 +122,10 @@ export default function FilesFilter({handleSubmit, handleHashSubmit}) {
           <div className='flex pr-4 ml-2'>
             <div className='flex'>
               <Image src={searchIcon} width={24} height={24} alt='search-icon' className='place-self-center hover:animate-spin' />
-              <p className='ml-2 place-self-center semibold text-xl'>Search</p>
+              <p className='ml-2 place-self-center semibold text-xl'>Search options</p>
             </div>
             <Image src={caretIcon} width={24} height={24} alt='caretIcon' 
-            className={`ml-auto transition-all duration-250 ${isMinimized ? 'rotate-0': 'rotate-180'}`}/>
+            className={`ml-auto transition-all duration-500 ${isMinimized ? 'rotate-0': 'rotate-180'}`}/>
           </div>
         </button>
       </div>

@@ -9,29 +9,34 @@ import FilesList from 'components/FileManagementPage/FilesList';
 export default function FileManagementPage({}) {
   
   const userData = sessionStorage.getItem('user')
-  const [files, setFiles] = useState();
-  const [isFailed, setIsFailed] = useState();
+  const [files, setFiles] = useState([]);
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    await getFiles();
-  };
-  
-  const getFiles = async () => {
+    setFiles([]);
+
+    const searchParams = {
+      name: event.target.elements.name.value,
+      ip: event.target.elements.ip.value,
+      dateFrom: event.target.elements.datefrom.value,
+      dateTo: event.target.elements.dateto.value,
+      maxResults: event.target.elements.maxresults.value,
+    };
+
     const headers = { 'Authorization': `Bearer ${JSON.parse(userData).accessToken}` };
-    await axios.get(process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/files', {headers})
+    await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/files/search', {searchParams}, {headers})
       .then(res => {
         setFiles(res.data.files);
       })
       .catch(err => {
-        setIsFailed(true);
         console.error(err);
       });
   };
 
   const handleHashSubmit = async (event) => {
     event.preventDefault();
-    
+    setFiles([]);
+
     const headers = { 'Authorization': `Bearer ${JSON.parse(userData).accessToken}` };
     await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/files/hash', {hashSum: event.target.elements.hashsum.value}, {headers})
       .then(res => {
@@ -53,7 +58,7 @@ export default function FileManagementPage({}) {
             <p className='mt-4 text-4xl'>File Management</p>
             <div className='mt-6 border-solid border-t-2 border-neutral-200 border-top'></div>
             <FilesFilter handleSubmit={handleSubmit} handleHashSubmit={handleHashSubmit}/>
-            {files ? <FilesList files={files}/> : null}
+            <FilesList files={files}/>
           </div>  
         </div>
       </div>
