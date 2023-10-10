@@ -25,7 +25,7 @@ export default function FilesFilter({handleSubmit, handleHashSubmit}) {
           <form onSubmit={handleSubmit} className='h-auto mt-0 pb-0 place-self-center w-full'>
 
             <div className='w-full pl-4'>
-              <div className='w-full mt-0 md:mt-4 grid md:flex'>
+              <div className='w-full mt-4 grid md:flex'>
                 <label className='h-6 mt-2 w-32 font-semibold'>Filename</label>
                 <input className='h-10 pl-2 pr-2 mr-4 grow
                 bg-neutral-700 text-lg

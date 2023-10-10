@@ -11,10 +11,11 @@ export default function LoginPage() {
 
   const delay = ms => new Promise(res => setTimeout(res, ms));
   
-  const [isFailed, setIsFailed] = useState();
   const [showingMessage, setShowingMessage] = useState();
+  const [message, setMessage] = useState();
 
-  const showMessage = async () => {
+  const showMessage = async (msg) => {
+    setMessage(msg);
     setShowingMessage(true);
     await delay(1500);
     setShowingMessage(false);
@@ -30,12 +31,11 @@ export default function LoginPage() {
           sessionStorage.setItem('user', JSON.stringify({login: event.target.elements.login.value, accessToken: res.data.accessToken}));
           router.replace('/panel/status');
         } else {
-          showMessage();
+          showMessage('Wrong user data');
         }
       })
       .catch(err => {
-        showMessage();
-        setIsFailed(true)
+        showMessage('Something went wrong');
         console.error(err);
       });
   };
@@ -62,8 +62,8 @@ export default function LoginPage() {
               name='password'
               type='password'/>    
             <button className='h-10 w-10/12 pl-2 mt-6 grid place-self-center
-            bg-neutral-900 hover:bg-neutral-800/75 active:bg-neutral-700/75 font-sans text-xl text-neutral-200 
-            border-solid border-2 border-fuchsia-900 rounded-md outline-none '>
+            bg-neutral-900 hover:bg-neutral-800 active:bg-neutral-700 font-sans text-xl text-neutral-200 
+            border-solid border-2 border-fuchsia-900 rounded-md outline-none'>
               <p className='place-self-center text-xl'>
                 Sign in
               </p>
@@ -72,7 +72,7 @@ export default function LoginPage() {
         </div>
         <p className={`place-self-center mt-0 text-xl transition-all duration-250
         ${showingMessage ? 'opacity-100': 'opacity-0'}`}>
-          {isFailed ? 'Something went wrong' : 'Wrong user data'}
+          {'' + message}
         </p>       
       </div>  
     ) 

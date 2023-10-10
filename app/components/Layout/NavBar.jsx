@@ -3,6 +3,7 @@ import Image from 'next/image';
 
 import statusIcon from '/icons/status-icon.svg';
 import fileManagementIcon from '/icons/file-management-icon.svg';
+import userManagementIcon from '/icons/user-management-icon.svg';
 
 export default function NavBar() {
 
@@ -21,6 +22,12 @@ export default function NavBar() {
             <Image src={fileManagementIcon} width={24} height={24} alt='fileManagementIcon' className='self-center'/>
             <p className='ml-2 self-center'>
               File Management
+            </p>  
+          </Link>  
+          <Link href="/panel/users" className='mt-2 flex'>
+            <Image src={userManagementIcon} width={24} height={24} alt='userManagementIcon' className='self-center'/>
+            <p className='ml-2 self-center'>
+              User Management
             </p>  
           </Link>  
         </div>
