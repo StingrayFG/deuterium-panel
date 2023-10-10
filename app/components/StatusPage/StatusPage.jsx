@@ -12,6 +12,7 @@ import filesCountIcon from '/icons/files-count-icon.svg';
 const { version } = require('/package.json');
 
 export default function StatusPage({}) {
+  
   const router = useRouter();
   const date = new Date(0);
   const userData = sessionStorage.getItem('user')

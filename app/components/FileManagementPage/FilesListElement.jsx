@@ -11,6 +11,7 @@ import trashIcon from '/icons/trash-icon.svg';
 import fileLockIcon from '/icons/file-lock-icon.svg';
 
 export default function FilesFilter({file, updateFiles}) {
+  
   const userData = sessionStorage.getItem('user');
 
   const [requiresDeletion, setRequiresDeletion] = useState();

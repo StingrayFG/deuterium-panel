@@ -7,6 +7,7 @@ import FilesFilter from 'components/FileManagementPage/FilesFilter';
 import FilesList from 'components/FileManagementPage/FilesList';
 
 export default function FileManagementPage({}) {
+  
   const userData = sessionStorage.getItem('user')
 
   const [isFailed, setIsFailed] = useState();
