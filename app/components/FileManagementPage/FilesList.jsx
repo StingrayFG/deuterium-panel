@@ -1,14 +1,28 @@
 'use client'
 
 import React from 'react';
-import { useEffect, useState } from 'react';
-import { useRouter } from "next/navigation";
+import { useState } from 'react';
 
 import FilesListElement from 'components/FileManagementPage/FilesListElement';
 
 export default function FilesFilter({files}) {
 
   const userData = sessionStorage.getItem('user')
+
+  const [updaterState, setUpdaterState] = useState();
+
+  const updateFiles = async (hashSum, isBlacklisted) => {
+    files.forEach((element, index, array) => {   
+      if (element.hashSum === hashSum) {
+        console.log(element);
+        element.isBlacklisted = isBlacklisted;
+        console.log(element);
+      }
+      
+    });
+    console.log('hashhhh'+hashSum);
+    setUpdaterState(!updaterState);
+  }
 
   if (userData) {
     return (
@@ -17,7 +31,7 @@ export default function FilesFilter({files}) {
         <div className='h-auto pl-0 pb-0
         bg-neutral-900 text-neutral-200 text-2xl'>  
           {files.map((file) => (
-            <FilesListElement file={file} key={file.uuid} />
+            <FilesListElement key={file.uuid} file={file} updateFiles={updateFiles}/>
           ))}
         </div>
       </div>

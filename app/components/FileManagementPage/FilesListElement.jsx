@@ -10,22 +10,42 @@ import downloadIcon from '/icons/download-icon.svg';
 import trashIcon from '/icons/trash-icon.svg';
 import fileLockIcon from '/icons/file-lock-icon.svg';
 
-export default function FilesFilter({file}) {
-
+export default function FilesFilter({file, updateFiles}) {
   const userData = sessionStorage.getItem('user');
+
   const [requiresDeletion, setRequiresDeletion] = useState();
-
-  const delay = ms => new Promise(res => setTimeout(res, ms));
-
+  
   const deleteFile = async () => {
     const headers = { 'Authorization': `Bearer ${JSON.parse(userData).accessToken}` };
-    await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/files/' + file.uuid + '/delete', {}, {headers})
+    await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/files/file/' + file.uuid + '/delete', {}, {headers})
       .then(res => {  
         setRequiresDeletion(true);  
       })
       .catch(err => {
         console.error(err);
       });
+  };
+
+  const blacklistFile = async () => {
+    const headers = { 'Authorization': `Bearer ${JSON.parse(userData).accessToken}` };
+    if (file.isBlacklisted) {
+      await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/files/blacklist/' + file.hashSum + '/remove', {}, {headers})
+      .then(res => {  
+        file.isBlacklisted = false;
+      })
+      .catch(err => {
+        console.error(err);
+      });
+    } else {
+      await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/files/blacklist/' + file.hashSum + '/add', {}, {headers})
+      .then(res => {  
+        file.isBlacklisted = true;
+      })
+      .catch(err => {
+        console.error(err);
+      });
+    } 
+    updateFiles(file.hashSum, file.isBlacklisted);
   };
 
   return (
@@ -50,29 +70,30 @@ export default function FilesFilter({file}) {
         <p>{file.uploadIP ? file.uploadIP : '-'}</p>
       </div>
       <div className='ml-4 pr-4 w-full flex'>
-        <p className='font-semibold w-48'>MD5</p>
+        <p className='font-semibold w-48'>Hashsum</p>
         <p className='break-all'>{file.hashSum}</p>
       </div>
       <div className='ml-4 mt-2 mb-2 pr-4 w-full flex'>
-        <Link href={process.env.NEXT_PUBLIC_BACKEND_URL + '/file/' + file.uuid + '/download'}>
-        <button className='h-10 ml-0 pl-2 mt-0 w-48 flex
-        bg-neutral-900 hover:bg-neutral-800 active:bg-neutral-700
-        border-solid border-2 border-fuchsia-900 rounded-md outline-none'>
-          <Image src={downloadIcon} width={24} height={24} alt='download-icon' className='place-self-center' />
-          <p className='ml-1 place-self-center'>Download</p>
-        </button>
-        </Link>
+        <a href={process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/files/file/' + file.uuid + '/download'}>
+          <button className='h-10 ml-0 pl-2 mt-0 w-48 flex
+          bg-neutral-900 hover:bg-neutral-800 active:bg-neutral-700
+          border-solid border-2 border-fuchsia-900 rounded-md outline-none'>
+            <Image src={downloadIcon} width={24} height={24} alt='download-icon' className='place-self-center' />
+            <p className='ml-1 place-self-center'>Download</p>
+          </button>
+        </a>
         <button onClick={deleteFile} className='h-10 ml-2 pl-2 pl-2 mt-0 w-48 flex
         bg-neutral-900 hover:bg-neutral-800 active:bg-neutral-700
         border-solid border-2 border-fuchsia-900 rounded-md outline-none'>
           <Image src={trashIcon} width={24} height={24} alt='trash-icon' className='place-self-center' />
           <p className='ml-1 place-self-center'>Delete</p>
         </button>
-        <button className='h-10 ml-2 pl-2 mt-0 w-48 flex
-        bg-neutral-900 hover:bg-neutral-800 active:bg-neutral-700
-        border-solid border-2 border-fuchsia-900 rounded-md outline-none'>
+        <button onClick={blacklistFile} className={`h-10 ml-2 pl-2 mt-0 flex
+        hover:bg-neutral-800 active:bg-neutral-700
+        border-solid border-2 border-fuchsia-900 rounded-md outline-none
+        ${file.isBlacklisted ? 'w-64 bg-fuchsia-950' : 'w-48 bg-neutral-900'}`}>
           <Image src={fileLockIcon} width={24} height={24} alt='file-lock-icon' className='place-self-center' />
-          <p className='ml-1 place-self-center'>Blacklist</p>
+          <p className='ml-1 place-self-center'>{file.isBlacklisted ? 'Remove from blacklist' : 'Blacklist'}</p>
         </button>
       </div> 
     </div>
