@@ -16,6 +16,7 @@ export default function StatusPage({}) {
   const date = new Date(0);
   const userData = sessionStorage.getItem('user')
 
+  const [isFailed, setIsFailed] = useState();
   const [status, setStatus] = useState();
   const [time, setTime] = useState(0);
 
@@ -36,41 +37,73 @@ export default function StatusPage({}) {
           setStatus(res.data.status);     
         })
         .catch(err => {
+          setIsFailed(true);
           console.error(err);
         });
     };
   });
 
-  if (status && userData) {
-    date.setSeconds(+status.uptime + +time); 
-    return (
-      <div className='w-full md:w-4/5 pt-20 pb-20 ml-auto'> 
-        <div className='h-auto ml-6 md:ml-12 mr-6 pb-12
-          bg-neutral-900 border-solid border-2 border-fuchsia-900 rounded-lg
-          text-neutral-200 text-xl'>    
-          <div className='ml-6 mr-6'>
-            <p className='mt-4 text-4xl'>Status</p>
-            <div className='mt-6 border-solid border-t-2 border-neutral-200 border-top'></div>
-            
-            <p className='mt-6'>deuterium-panel v{version}</p>
-            <p className='mt-2'>deuterium v{status.version}</p>
-
-            <div className='flex mt-6'>
-              <Image src={uptimeIcon} width={24} height={24} alt='uptimeIcon' className='self-center'/>
-              <p className='ml-2'>{Math.floor(date.getTime() / (86400 * 1000)) + ':' + date.toISOString().slice(11, 19)}</p>
-            </div>        
-            <div className='flex mt-2'>
-              <Image src={filesSizeIcon} width={24} height={24} alt='filesSizeIcon' className='self-center'/>
-              <p className='ml-2'>{status.filesSize} MB</p>
-            </div>
-            <div className='flex mt-2'>
-              <Image src={filesCountIcon} width={24} height={24} alt='filesCountIcon' className='self-center'/>
-              <p className='ml-2'>{status.filesCount} </p>
-            </div>
-          </div>  
+  if (userData) {
+    if (!isFailed && !status) {
+      return (
+        <div className='w-full md:w-4/5 pt-20 pb-20 ml-auto'> 
+          <div className='h-auto ml-6 md:ml-12 mr-6 pb-12
+            bg-neutral-900 border-solid border-2 border-fuchsia-900 rounded-lg
+            text-neutral-200 text-2xl'>    
+            <div className='ml-6 mr-6'>
+              <p className='mt-4 text-4xl'>Status</p>
+              <div className='mt-6 border-solid border-t-2 border-neutral-200 border-top'></div>
+            </div>  
+          </div>
         </div>
-      </div>
-    ) 
+      ) 
+    }
+    if (isFailed) {
+      return (
+        <div className='w-full md:w-4/5 pt-20 pb-20 ml-auto'> 
+          <div className='h-auto ml-6 md:ml-12 mr-6 pb-12
+            bg-neutral-900 border-solid border-2 border-fuchsia-900 rounded-lg
+            text-neutral-200 text-2xl'>    
+            <div className='ml-6 mr-6'>
+              <p className='mt-4 text-4xl'>Status</p>
+              <div className='mt-6 border-solid border-t-2 border-neutral-200 border-top'></div>
+              
+              <p className='mt-6'>Something went wrong</p>
+            </div>  
+          </div>
+        </div>
+      ) 
+    } else if (status) {
+      date.setSeconds(+status.uptime + +time); 
+      return (
+        <div className='w-full md:w-4/5 pt-20 pb-20 ml-auto'> 
+          <div className='h-auto ml-6 md:ml-12 mr-6 pb-12
+            bg-neutral-900 border-solid border-2 border-fuchsia-900 rounded-lg
+            text-neutral-200 text-2xl'>    
+            <div className='ml-6 mr-6'>
+              <p className='mt-4 text-4xl'>Status</p>
+              <div className='mt-6 border-solid border-t-2 border-neutral-200 border-top'></div>
+              
+              <p className='mt-6'>deuterium-panel v{version}</p>
+              <p className='mt-2'>deuterium v{status.version}</p>
+  
+              <div className='flex mt-6'>
+                <Image src={uptimeIcon} width={24} height={24} alt='uptimeIcon' className='self-center'/>
+                <p className='ml-2'>{Math.floor(date.getTime() / (86400 * 1000)) + ':' + date.toISOString().slice(11, 19)}</p>
+              </div>        
+              <div className='flex mt-2'>
+                <Image src={filesSizeIcon} width={24} height={24} alt='filesSizeIcon' className='self-center'/>
+                <p className='ml-2'>{status.filesSize} MB</p>
+              </div>
+              <div className='flex mt-2'>
+                <Image src={filesCountIcon} width={24} height={24} alt='filesCountIcon' className='self-center'/>
+                <p className='ml-2'>{status.filesCount} </p>
+              </div>
+            </div>  
+          </div>
+        </div>
+      ) 
+    }  
   } else if (!userData) {
     router.replace('/');
   } else {
