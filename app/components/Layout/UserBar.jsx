@@ -7,7 +7,7 @@ import logoutIcon from '/icons/logout-icon.svg';
 
 export default function UserBar() {
   const router = useRouter();
-  const userData = sessionStorage.getItem('user')
+  const userData = typeof window !== 'undefined' ? sessionStorage.getItem('user') : null
 
   const logOut = () => {
     sessionStorage.removeItem('user');
@@ -22,7 +22,7 @@ export default function UserBar() {
         border-solid border-2 border-fuchsia-900 rounded-lg'>
         <div className='w-11/12 h-full ml-4 flex'> 
           <p className='w-11/12 self-center'>
-            {JSON.parse(userData).login}
+            {userData ? JSON.parse(userData).login : ''}
           </p>  
           <button className='w-1/12 self-center' onClick={logOut}>
             <Image src={logoutIcon} width={24} height={24} alt='logoutIcon' className='self-center'/>

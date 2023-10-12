@@ -2,13 +2,15 @@
 
 import { useState } from 'react';
 import axios from 'axios';
+import { useRouter } from 'next/navigation'
 
 import FilesFilter from 'components/FileManagementPage/FilesFilter';
 import FilesList from 'components/FileManagementPage/FilesList';
 
 export default function FileManagementPage({}) {
   
-  const userData = sessionStorage.getItem('user')
+  const router = useRouter();
+  const userData = typeof window !== 'undefined' ? sessionStorage.getItem('user') : null
 
   const [isFailed, setIsFailed] = useState();
   const [files, setFiles] = useState([]);
@@ -82,10 +84,7 @@ export default function FileManagementPage({}) {
         </div>
       ) 
     }
-  } else if (!userData) {
-    router.replace('/');
   } else {
-    null
+    router.replace('/');
   }
-  
 }

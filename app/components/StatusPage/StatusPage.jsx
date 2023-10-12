@@ -12,10 +12,10 @@ import filesCountIcon from '/icons/files-count-icon.svg';
 const { version } = require('/package.json');
 
 export default function StatusPage({}) {
-  
+
   const router = useRouter();
   const date = new Date(0);
-  const userData = sessionStorage.getItem('user')
+  const userData = typeof window !== 'undefined' ? sessionStorage.getItem('user') : null
 
   const [isFailed, setIsFailed] = useState();
   const [status, setStatus] = useState();
@@ -105,10 +105,7 @@ export default function StatusPage({}) {
         </div>
       ) 
     }  
-  } else if (!userData) {
-    router.replace('/');
   } else {
-    null
+    router.replace('/');
   }
-  
 }

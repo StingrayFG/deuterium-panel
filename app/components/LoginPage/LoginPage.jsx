@@ -1,13 +1,13 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation'
 
 export default function LoginPage() {
 
   const router = useRouter();
-  const userData = sessionStorage.getItem('user')
+  const userData = typeof window !== 'undefined' ? sessionStorage.getItem('user') : null
 
   const delay = ms => new Promise(res => setTimeout(res, ms));
   
@@ -28,7 +28,9 @@ export default function LoginPage() {
     await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/login', {userData: formUserData})
       .then(res => {
         if (res.data.exists === true) {
-          sessionStorage.setItem('user', JSON.stringify({login: event.target.elements.login.value, accessToken: res.data.accessToken}));
+          if (typeof window !== 'undefined'){
+            sessionStorage.setItem('user', JSON.stringify({login: event.target.elements.login.value, accessToken: res.data.accessToken}));
+          }   
           router.replace('/panel/status');
         } else {
           showMessage('Wrong user data');

@@ -1,19 +1,13 @@
 'use client';
 
-import Image from 'next/image'
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/navigation'
 
-import uptimeIcon from '/icons/uptime-icon.svg';
-import filesSizeIcon from '/icons/files-size-icon.svg';
-import filesCountIcon from '/icons/files-count-icon.svg';
-
-const { version } = require('/package.json');
-
 export default function UserManagementPage({}) {
   
-  const userData = sessionStorage.getItem('user')
+  const router = useRouter();
+  const userData = typeof window !== 'undefined' ? sessionStorage.getItem('user') : null
 
   const delay = ms => new Promise(res => setTimeout(res, ms));
 
@@ -118,7 +112,7 @@ export default function UserManagementPage({}) {
         
     )
   } else {
-    null
+    router.replace('/panel/status');
   }
   
 }
