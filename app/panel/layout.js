@@ -1,7 +1,9 @@
 import React from 'react';
 
-import NavBar from 'components/Layout/NavBar';
-import UserBar from 'components/Layout/UserBar';
+import dynamic from 'next/dynamic'
+
+const UserBar = dynamic(() => import('components/Layout/UserBar'), { ssr: false })
+const NavBar = dynamic(() => import('components/Layout/NavBar'), { ssr: false })
 
 import 'globals.css'
 
