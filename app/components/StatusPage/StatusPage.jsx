@@ -47,8 +47,8 @@ export default function StatusPage({}) {
   if (userData) {
     if (!isFailed && !status) {
       return (
-        <div className='w-full md:w-4/5 pt-20 pb-20 ml-auto'> 
-          <div className='h-auto ml-6 md:ml-12 mr-6 pb-12
+        <div className='w-full md:w-4/5 pt-16 md:pt-24 pb-20 ml-auto'> 
+          <div className='h-auto ml-2 md:ml-12 mr-2 md:mr-6 pb-12
             bg-neutral-900 border-solid border-2 border-fuchsia-900 rounded-lg
             text-neutral-200 text-2xl'>    
             <div className='ml-6 mr-6'>
@@ -61,8 +61,8 @@ export default function StatusPage({}) {
     }
     if (isFailed) {
       return (
-        <div className='w-full md:w-4/5 pt-20 pb-20 ml-auto'> 
-          <div className='h-auto ml-6 md:ml-12 mr-6 pb-12
+        <div className='w-full md:w-4/5 pt-16 md:pt-24 pb-20 ml-auto'> 
+          <div className='h-auto ml-2 md:ml-12 mr-2 md:mr-6 pb-12
             bg-neutral-900 border-solid border-2 border-fuchsia-900 rounded-lg
             text-neutral-200 text-2xl'>    
             <div className='ml-6 mr-6'>
@@ -77,8 +77,8 @@ export default function StatusPage({}) {
     } else if (status) {
       date.setSeconds(+status.uptime + +time); 
       return (
-        <div className='w-full md:w-4/5 pt-20 pb-20 ml-auto'> 
-          <div className='h-auto ml-6 md:ml-12 mr-6 pb-12
+        <div className='w-full md:w-4/5 pt-16 md:pt-24 pb-20 ml-auto'> 
+          <div className='h-auto ml-2 md:ml-12 mr-2 md:mr-6 pb-12
             bg-neutral-900 border-solid border-2 border-fuchsia-900 rounded-lg
             text-neutral-200 text-2xl'>    
             <div className='ml-6 mr-6'>
