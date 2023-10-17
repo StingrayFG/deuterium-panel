@@ -51,8 +51,8 @@ export default function StatusPage({}) {
           <div className='h-auto ml-2 md:ml-12 mr-2 md:mr-6 pb-12
             bg-neutral-900 border-solid border-2 border-fuchsia-900 rounded-lg
             text-neutral-200 text-2xl'>    
-            <div className='ml-6 mr-6'>
-              <p className='mt-4 text-4xl'>Status</p>
+            <div className='ml-4 mr-4 md:ml-6 md:mr-6'>
+            <p className='mt-2 md:mt-4 text-4xl'>Status</p>
               <div className='mt-6 border-solid border-t-2 border-neutral-200 border-top'></div>
             </div>  
           </div>
@@ -65,10 +65,9 @@ export default function StatusPage({}) {
           <div className='h-auto ml-2 md:ml-12 mr-2 md:mr-6 pb-12
             bg-neutral-900 border-solid border-2 border-fuchsia-900 rounded-lg
             text-neutral-200 text-2xl'>    
-            <div className='ml-6 mr-6'>
-              <p className='mt-4 text-4xl'>Status</p>
+             <div className='ml-4 mr-4 md:ml-6 md:mr-6'>
+              <p className='mt-2 md:mt-4 text-4xl'>Status</p>
               <div className='mt-6 border-solid border-t-2 border-neutral-200 border-top'></div>
-              
               <p className='mt-6'>Something went wrong</p>
             </div>  
           </div>
@@ -81,11 +80,11 @@ export default function StatusPage({}) {
           <div className='h-auto ml-2 md:ml-12 mr-2 md:mr-6 pb-12
             bg-neutral-900 border-solid border-2 border-fuchsia-900 rounded-lg
             text-neutral-200 text-2xl'>    
-            <div className='ml-6 mr-6'>
-              <p className='mt-4 text-4xl'>Status</p>
-              <div className='mt-6 border-solid border-t-2 border-neutral-200 border-top'></div>
+            <div className='ml-4 mr-4 md:ml-6 md:mr-6'>
+              <p className='mt-2 md:mt-4 text-4xl'>Status</p>
+              <div className='mt-4 md:mt-6 border-solid border-t-2 border-neutral-200 border-top'></div>
               
-              <p className='mt-6'>deuterium-panel v{version}</p>
+              <p className='mt-4 md:mt-6'>deuterium-panel v{version}</p>
               <p className='mt-2'>deuterium v{status.version}</p>
   
               <div className='flex mt-6'>
