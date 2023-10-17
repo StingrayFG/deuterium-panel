@@ -48,19 +48,20 @@ export default function UserManagementPage({}) {
 
   if (userData) {
     return (
-      <div className='w-full md:w-4/5 pt-20 pb-20 ml-auto'> 
-        <div className='h-auto ml-6 md:ml-12 mr-6 pb-12
+      <div className='w-full md:w-4/5 pt-16 pb-20 ml-auto'> 
+        <div className='h-auto ml-2 md:ml-12 mr-2 md:mr-6 pb-12
           bg-neutral-900 border-solid border-2 border-fuchsia-900 rounded-lg
           text-neutral-200 text-2xl'>    
-          <div className='ml-6 mr-6'>
-            <p className='mt-4 text-4xl'>Status</p>
-            <div className='mt-6 border-solid border-t-2 border-neutral-200 border-top'></div>
+          <div className='ml-4 mr-4 md:ml-6 md:mr-6'>
+            <p className='mt-2 md:mt-4 text-4xl'>User Management</p>
+            <div className='mt-4 md:mt-6 border-solid border-t-2 border-neutral-200 border-top'></div>
             
-            <form onSubmit={handleSubmit} className='mt-6 w-1/2 text-xl grid place-self-center 
-            border-dashed border-2 border-transparent rounded-lg'>
-              <div className='w-full mt-0 grid md:flex'>
-                <label className='h-6 mt-2 w-48 font-semibold'>Username</label>
-                <input className='h-10 pl-2 pr-2 mr-4 grow
+            <form onSubmit={handleSubmit} className='mt-2 md:mt-6 w-full text-xl grid place-self-center 
+            border-dashed border-0 border-transparent rounded-lg'>
+
+              <div className='w-full mt-0 md:mt-2 grid md:flex'>
+                <label className='h-6 mt-2 mb-2 w-48 font-semibold'>Username</label>
+                <input className='h-10 pl-2 pr-2 grow
                 bg-neutral-700 text-lg
                 border-solid border-2 border-neutral-200 rounded-md outline-none '
                   placeholder='At least 4 characters long'
@@ -69,9 +70,9 @@ export default function UserManagementPage({}) {
                   min='4' max='64'/>
               </div>
 
-              <div className='w-full mt-2 grid md:flex'>
-                <label className='h-6 mt-2 w-48 font-semibold'>Password</label>
-                <input className='h-10 pl-2 pr-2 mr-4 grow
+              <div className='w-full mt-0 md:mt-2 grid md:flex'>
+                <label className='h-6 mt-2 mb-2 w-48 font-semibold'>Password</label>
+                <input className='h-10 pl-2 pr-2 grow
                 bg-neutral-700 text-lg 
                 border-solid border-2 border-neutral-200 rounded-md outline-none '
                   placeholder='At least 8 characters long'
@@ -80,9 +81,9 @@ export default function UserManagementPage({}) {
                   min='8' max='64'/>
               </div> 
 
-              <div className='w-full mt-2 grid md:flex'>
-                <label className='h-6 mt-2 w-48 font-semibold'>Repeat Password</label>
-                <input className='h-10 pl-2 pr-2 mr-4 grow
+              <div className='w-full mt-0 md:mt-2 grid md:flex'>
+                <label className='h-6 mt-2 mb-2 w-48 font-semibold'>Repeat Password</label>
+                <input className='h-10 pl-2 pr-2 grow
                 bg-neutral-700 text-lg 
                 border-solid border-2 border-neutral-200 rounded-md outline-none '
                   placeholder=''
@@ -91,16 +92,13 @@ export default function UserManagementPage({}) {
                   min='8' max='64'/>
               </div> 
 
-              <div className='w-full mt-2 grid md:flex'>
-                <button className='h-10 pl-2 pr-2 mr-4 ml-48 grow
+              <div className='w-full md:w-72 ml-auto mt-2 grid'>
+                <button className='w-full md:w-72 h-10 pl-2 pr-2
                 bg-neutral-900 hover:bg-neutral-800 active:bg-neutral-700 text-xl
                 border-solid border-2 border-fuchsia-900 rounded-md '>
                   Submit
                 </button>
-              </div>   
-
-              <div className='w-full mt-2 pl-48 pr-4 grid'>
-                <p className={`place-self-center mt-0 text-xl transition-all duration-250
+                <p className={`mt-0 text-xl place-self-center transition-all duration-250
                 ${showingMessage ? 'opacity-100': 'opacity-0'}`}>
                   {'' + message}
                 </p>    
