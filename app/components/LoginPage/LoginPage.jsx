@@ -44,9 +44,9 @@ export default function LoginPage() {
   
   if (!userData) {
     return (
-      <div className='w-96 h-72 place-self-center grid 
+      <div className='w-full md:w-96 h-72 place-self-center grid 
       text-2xl font-sans text-neutral-200'>
-        <div className='w-96 h-[14rem] place-self-center grid
+        <div className='w-11/12 md:w-96 h-[14rem] place-self-center grid
         bg-neutral-900/50
         border-dashed border-2 border-fuchsia-200 rounded-lg'>
           <form onSubmit={handleSubmit} className='grid place-self-center w-full
