@@ -56,27 +56,27 @@ export default function FileManagementPage({}) {
   if (userData) {
     if (isFailed) {
       return (
-        <div className='h-auto w-full md:w-4/5 pt-20 pb-20 ml-auto transition-all transition-500'> 
-          <div className='h-auto ml-6 md:ml-12 mr-6 pb-12
+        <div className='h-auto w-full md:w-4/5 pt-16 md:pt-24 pb-20 ml-auto transition-all transition-500'> 
+          <div className='h-auto ml-2 md:ml-12 mr-2 md:mr-6 pb-12
             bg-neutral-900 border-solid border-2 border-fuchsia-900 rounded-lg
             text-neutral-200 text-2xl'>    
-            <div className='ml-6 mr-6'>
-              <p className='mt-4 text-4xl'>File Management</p>
-              <div className='mt-6 border-solid border-t-2 border-neutral-200 border-top'></div>
-              <p className='mt-6'>Something went wrong</p>
+            <div className='ml-4 mr-4 md:ml-6 md:mr-6'>
+              <p className='mt-2 md:mt-4 text-4xl'>File Management</p>
+              <div className='mt-4 md:mt-6 border-solid border-t-2 border-neutral-200 border-top'></div>
+              <p className='mt-4 md:mt-6'>Something went wrong</p>
             </div>  
           </div>
         </div>
       ) 
     } else {
       return (
-        <div className='h-auto w-full md:w-4/5 pt-20 pb-20 ml-auto transition-all transition-500'> 
-          <div className='h-auto ml-6 md:ml-12 mr-6 pb-12
+        <div className='h-auto w-full md:w-4/5 pt-16 md:pt-24 pb-20 ml-auto transition-all transition-500'> 
+          <div className='h-auto ml-2 md:ml-12 mr-2 md:mr-6 pb-12
             bg-neutral-900 border-solid border-2 border-fuchsia-900 rounded-lg
             text-neutral-200 text-2xl'>    
-            <div className='ml-6 mr-6'>
-              <p className='mt-4 text-4xl'>File Management</p>
-              <div className='mt-6 border-solid border-t-2 border-neutral-200 border-top'></div>
+            <div className='ml-4 mr-4 md:ml-6 md:mr-6'>
+              <p className='mt-2 md:mt-4 text-4xl'>File Management</p>
+              <div className='mt-4 md:mt-6 border-solid border-t-2 border-neutral-200 border-top'></div>
               <FilesFilter handleSubmit={handleSubmit} handleHashSubmit={handleHashSubmit}/>
               <FilesList files={files}/>
             </div>  

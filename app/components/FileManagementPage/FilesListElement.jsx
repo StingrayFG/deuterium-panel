@@ -55,41 +55,41 @@ export default function FilesFilter({file, updateFiles}) {
     transition-all duration-500 
     ${requiresDeletion? 'opacity-0 max-h-0 border-0 mt-0 pt-0 pb-0' : 'opacity-100 max-h-96 border-2 mt-2 pt-2 pb-2'}`}>
       <div className='ml-4 pr-4 w-full flex'>
-        <p className='font-semibold w-48'>Name</p>
+        <p className='font-semibold w-32'>Name</p>
         <p>{file.name}</p>
       </div>
       <div className='ml-4 pr-4 w-full flex'>
-        <p className='font-semibold w-48'>UUID</p>
+        <p className='font-semibold w-32'>UUID</p>
         <p>{file.uuid}</p>
       </div>
       <div className='ml-4 pr-4 w-full flex'>
-        <p className='font-semibold w-48'>Upload Date</p>
+        <p className='font-semibold w-32'>Upload Date</p>
         <p>{file.uploadDate.slice(0, 10) + ' ' + file.uploadDate.slice(11, 19)}</p>
       </div>
       <div className='ml-4 pr-4 w-full flex'>
-        <p className='font-semibold w-48'>Upload IP</p>
+        <p className='font-semibold w-32'>Upload IP</p>
         <p>{file.uploadIP ? file.uploadIP : '-'}</p>
       </div>
       <div className='ml-4 pr-4 w-full flex'>
-        <p className='font-semibold w-48'>Hashsum</p>
+        <p className='font-semibold w-32 flex-shrink-0'>Hashsum</p>
         <p className='break-all'>{file.hashSum}</p>
       </div>
       <div className='ml-4 mt-2 mb-2 pr-4 w-full flex'>
         <a href={process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/files/file/' + file.uuid + '/download'}>
-          <button className='h-10 ml-0 pl-2 mt-0 w-48 flex
+          <button className='w-10 md:w-48 h-10 ml-0 pl-1.5 md:pl-2 mt-0 flex overflow-hidden
           bg-neutral-900 hover:bg-neutral-800 active:bg-neutral-700
           border-solid border-2 border-fuchsia-900 rounded-md outline-none'>
             <Image src={downloadIcon} width={24} height={24} alt='download-icon' className='place-self-center' />
-            <p className='ml-1 place-self-center'>Download</p>
+            <p className='opacity-0 md:opacity-100 w-0 md:w-auto ml-1 place-self-center'>Download</p>
           </button>
         </a>
-        <button onClick={deleteFile} className='h-10 ml-2 pl-2 pl-2 mt-0 w-48 flex
+        <button onClick={deleteFile} className='w-10 md:w-48 h-10 ml-2 pl-1.5 md:pl-2 mt-0 flex overflow-hidden
         bg-neutral-900 hover:bg-neutral-800 active:bg-neutral-700
         border-solid border-2 border-fuchsia-900 rounded-md outline-none'>
           <Image src={trashIcon} width={24} height={24} alt='trash-icon' className='place-self-center' />
-          <p className='ml-1 place-self-center'>Delete</p>
+          <p className='opacity-0 md:opacity-100 w-0 md:w-auto ml-1 place-self-center'>Delete</p>
         </button>
-        <button onClick={blacklistFile} className={`h-10 ml-2 pl-2 mt-0 flex
+        <button onClick={blacklistFile} className={`h-10 ml-2 pl-1.5 md:pl-2 mt-0 flex overflow-hidden
         hover:bg-neutral-800 active:bg-neutral-700
         border-solid border-2 border-fuchsia-900 rounded-md outline-none
         ${file.isBlacklisted ? 'w-64 bg-fuchsia-950' : 'w-48 bg-neutral-900'}`}>

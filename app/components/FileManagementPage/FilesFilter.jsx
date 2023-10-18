@@ -19,14 +19,14 @@ export default function FilesFilter({handleSubmit, handleHashSubmit}) {
   if (userData) {
     return (
       <div className='w-full mt-6 place-self-center'>
-        <div className={`w-full overflow-hidden text-xl
+        <div className={`w-full overflow-hidden text-xl flex-shrink-0
         border-solid border-2 border-neutral-200 rounded-lg
         transition-all duration-500 ${isMinimized ? 'opacity-0 max-h-0' : 'mb-2 opacity-100 max-h-screen'}`}>
           <form onSubmit={handleSubmit} className='h-auto mt-0 pb-0 place-self-center w-full'>
 
-            <div className='w-full pl-4'>
-              <div className='w-full mt-4 grid md:flex'>
-                <label className='h-6 mt-2 w-32 font-semibold'>Filename</label>
+            <div className='w-full pl-4 pt-0'>
+              <div className='w-full mt-0 md:mt-2 grid md:flex'>
+                <label className='h-6 mt-2 mb-2 w-32 font-semibold'>Filename</label>
                 <input className='h-10 pl-2 pr-2 mr-4 grow
                 bg-neutral-700 text-lg
                 border-solid border-2 border-neutral-200 rounded-md outline-none '
@@ -35,8 +35,8 @@ export default function FilesFilter({handleSubmit, handleHashSubmit}) {
                   type='text'/>
               </div>
 
-              <div className='w-full mt-2 grid md:flex'>
-                <label className='h-6 mt-2 w-32 font-semibold'>Upload IP</label>
+              <div className='w-full mt-0 md:mt-2 grid md:flex'>
+                <label className='h-6 mt-2 mb-2 w-32 font-semibold'>Upload IP</label>
                 <input className='h-10 pl-2 pr-2 mr-4 grow
                 bg-neutral-700 text-lg 
                 border-solid border-2 border-neutral-200 rounded-md outline-none '
@@ -45,8 +45,8 @@ export default function FilesFilter({handleSubmit, handleHashSubmit}) {
                   type='text'/>
               </div> 
 
-              <div className='w-full mt-2 grid md:flex h-max'>
-                <label className='h-6 mt-2 w-32 font-semibold'>Upload date</label>
+              <div className='w-full mt-0 md:mt-2 grid md:flex h-max'>
+                <label className='h-6 mt-2 mb-2 w-32 font-semibold'>Upload date</label>
                 <div className='mr-4 md:flex grow'>
                   <input className='h-10 w-full md:w-1/2 pl-2 pr-2
                       bg-neutral-700 text-lg
@@ -62,8 +62,8 @@ export default function FilesFilter({handleSubmit, handleHashSubmit}) {
                 </div>        
               </div> 
 
-              <div className='w-full mt-2 grid md:flex'>
-                <label className='h-6 mt-2 w-32 font-semibold'>Max results</label>
+              <div className='w-full mt-0 md:mt-2 grid md:flex'>
+                <label className='h-6 mt-2 mb-2 w-32 font-semibold'>Max results</label>
                 <input className='h-10 pl-2 pr-3 mr-4 grow
                 bg-neutral-700 text-lg 
                 border-solid border-2 border-neutral-200 rounded-md outline-none'
@@ -75,7 +75,7 @@ export default function FilesFilter({handleSubmit, handleHashSubmit}) {
 
               <div className='w-full mt-2 grid md:flex h-max'> 
                 <div className='w-full pr-4 grid h-max'>    
-                  <button className='h-10 pl-2 mt-0 w-72 ml-auto flex
+                  <button className='h-10 pl-2 mt-0 w-full md:w-72 ml-auto flex
                   bg-neutral-900 hover:bg-neutral-800 active:bg-neutral-700
                   border-solid border-2 border-fuchsia-900 rounded-md outline-none'>
                     <Image src={searchIcon} width={24} height={24} alt='search-icon' className='place-self-center' />
@@ -93,7 +93,7 @@ export default function FilesFilter({handleSubmit, handleHashSubmit}) {
           border-dashed border-0 border-neutral-200 rounded-lg'>
             <div className='w-full pl-4'>
               <div className='h-auto w-full mt-0 md:mt-4 grid md:flex'>
-                <label className='h-6 mt-2 w-32 font-semibold'>Hashsum</label>
+                <label className='h-6 mt-2 mb-2 w-32 font-semibold'>Hashsum</label>
                 <input required='required' className='h-10 pl-2 pr-2 mr-4 grow
                 bg-neutral-700 text-lg
                 border-solid border-2 border-neutral-200 rounded-md outline-none '
@@ -103,7 +103,7 @@ export default function FilesFilter({handleSubmit, handleHashSubmit}) {
               </div>
               <div className='w-full mt-2 grid md:flex h-max'> 
                 <div className='w-full pr-4 grid h-max'>    
-                  <button className='h-10 pl-2 mt-0 w-72 ml-auto flex
+                  <button className='h-10 pl-2 mt-0 w-full md:w-72 ml-auto flex
                   bg-neutral-900 hover:bg-neutral-800 active:bg-neutral-700
                   border-solid border-2 border-fuchsia-900 rounded-md outline-none'>
                     <Image src={searchIcon} width={24} height={24} alt='search-icon' className='place-self-center' />
