@@ -54,23 +54,23 @@ export default function FilesFilter({file, updateFiles}) {
     border-solid border-neutral-200 rounded-lg
     transition-all duration-500 
     ${requiresDeletion? 'opacity-0 max-h-0 border-0 mt-0 pt-0 pb-0' : 'opacity-100 max-h-96 border-2 mt-2 pt-2 pb-2'}`}>
-      <div className='ml-4 pr-4 w-full flex'>
-        <p className='font-semibold w-32'>Name</p>
-        <p>{file.name}</p>
+      <div className='ml-4 pr-2 w-full flex'>
+        <p className='font-semibold w-32 flex-shrink-0'>Name</p>
+        <p className='break-all'>{file.name}</p>
       </div>
-      <div className='ml-4 pr-4 w-full flex'>
-        <p className='font-semibold w-32'>UUID</p>
-        <p>{file.uuid}</p>
+      <div className='ml-4 pr-2 w-full flex'>
+        <p className='font-semibold w-32 flex-shrink-0'>UUID</p>
+        <p className='break-all'>{file.uuid}</p>
       </div>
-      <div className='ml-4 pr-4 w-full flex'>
-        <p className='font-semibold w-32'>Upload Date</p>
-        <p>{file.uploadDate.slice(0, 10) + ' ' + file.uploadDate.slice(11, 19)}</p>
+      <div className='ml-4 pr-2 w-full flex'>
+        <p className='font-semibold w-32 flex-shrink-0'>Upload Date</p>
+        <p className='break-all'>{file.uploadDate.slice(0, 10) + ' ' + file.uploadDate.slice(11, 19)}</p>
       </div>
-      <div className='ml-4 pr-4 w-full flex'>
-        <p className='font-semibold w-32'>Upload IP</p>
-        <p>{file.uploadIP ? file.uploadIP : '-'}</p>
+      <div className='ml-4 pr-2 w-full flex'>
+        <p className='font-semibold w-32 flex-shrink-0'>Upload IP</p>
+        <p className='break-all'>{file.uploadIP ? file.uploadIP : '-'}</p>
       </div>
-      <div className='ml-4 pr-4 w-full flex'>
+      <div className='ml-4 pr-2 w-full flex'>
         <p className='font-semibold w-32 flex-shrink-0'>Hashsum</p>
         <p className='break-all'>{file.hashSum}</p>
       </div>
