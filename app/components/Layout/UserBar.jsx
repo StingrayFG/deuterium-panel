@@ -12,11 +12,11 @@ export default function UserBar() {
 
   const [isMinimized, setIsMinimized] = useState(true);
 
-  const switchMinimized = async () => {
+  const switchMinimized = async () => { // Switch isMinimized to change between minimized and extended view
     setIsMinimized(!isMinimized);
   };
 
-  const logOut = () => {
+  const logOut = () => { // Remove user data from session storage
     sessionStorage.removeItem('user');
     router.replace('/');
   };

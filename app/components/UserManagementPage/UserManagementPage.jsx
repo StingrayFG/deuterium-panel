@@ -14,14 +14,14 @@ export default function UserManagementPage({}) {
   const [showingMessage, setShowingMessage] = useState();
   const [message, setMessage] = useState();
 
-  const showMessage = async (msg) => {
+  const showMessage = async (msg) => { // Handle popping up message animation
     setMessage(msg);
     setShowingMessage(true);
     await delay(1500);
     setShowingMessage(false);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => { // Handle new user creation
     event.preventDefault();
 
     if (event.target.elements.password.value  === event.target.elements.repeatpassword.value) {

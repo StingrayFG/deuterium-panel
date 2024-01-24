@@ -15,7 +15,7 @@ export default function FileManagementPage({}) {
   const [isFailed, setIsFailed] = useState();
   const [files, setFiles] = useState([]);
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => { // Handle file search by given parameters
     event.preventDefault();
     setFiles([]);
 
@@ -38,7 +38,7 @@ export default function FileManagementPage({}) {
       });
   };
 
-  const handleHashSubmit = async (event) => {
+  const handleHashSubmit = async (event) => { // Handle file search the specified hashsum
     event.preventDefault();
     setFiles([]);
 

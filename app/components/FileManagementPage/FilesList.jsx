@@ -11,16 +11,12 @@ export default function FilesFilter({files}) {
 
   const [updaterState, setUpdaterState] = useState();
 
-  const updateFiles = async (hashSum, isBlacklisted) => {
+  const updateFiles = async (hashSum, isBlacklisted) => { // Update the files' isBlacklisted field based on the specified hashsum
     files.forEach((element, index, array) => {   
       if (element.hashSum === hashSum) {
-        console.log(element);
         element.isBlacklisted = isBlacklisted;
-        console.log(element);
-      }
-      
+      }    
     });
-    console.log('hashhhh'+hashSum);
     setUpdaterState(!updaterState);
   }
 

@@ -14,14 +14,14 @@ export default function LoginPage() {
   const [showingMessage, setShowingMessage] = useState();
   const [message, setMessage] = useState();
 
-  const showMessage = async (msg) => {
+  const showMessage = async (msg) => { // Handle popping up message animation
     setMessage(msg);
     setShowingMessage(true);
     await delay(1500);
     setShowingMessage(false);
   };
 
-  const handleSubmit = async (event) => {
+  const handleSubmit = async (event) => { // Handle logging in
     event.preventDefault();
 
     const formUserData = {login: event.target.elements.login.value, password: event.target.elements.password.value}

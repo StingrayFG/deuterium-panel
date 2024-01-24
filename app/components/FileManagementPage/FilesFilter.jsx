@@ -11,7 +11,7 @@ export default function FilesFilter({handleSubmit, handleHashSubmit}) {
   const userData = sessionStorage.getItem('user')
   const [isMinimized, setIsMinimized] = useState();
 
-  const changeSize = async () => {
+  const changeSize = async () => { // Switch isMinimized to change between minimized and extended view
     setIsMinimized(!isMinimized)
     console.log(isMinimized)
   };

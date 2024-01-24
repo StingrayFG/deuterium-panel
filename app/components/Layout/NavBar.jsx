@@ -14,7 +14,7 @@ export default function NavBar() {
 
   const [isMinimized, setIsMinimized] = useState(true);
 
-  const switchMinimized = async () => {
+  const switchMinimized = async () => { // Switch isMinimized to change between minimized and extended view
     setIsMinimized(!isMinimized);
   };
 

@@ -15,7 +15,7 @@ export default function FilesFilter({file, updateFiles}) {
 
   const [requiresDeletion, setRequiresDeletion] = useState();
   
-  const deleteFile = async () => {
+  const deleteFile = async () => { // Handle file removal
     const headers = { 'Authorization': `Bearer ${JSON.parse(userData).accessToken}` };
     await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/files/file/' + file.uuid + '/delete', {}, {headers})
       .then(res => {  
@@ -26,10 +26,10 @@ export default function FilesFilter({file, updateFiles}) {
       });
   };
 
-  const blacklistFile = async () => {
+  const blacklistFile = async () => { // Handle blacklist
     const headers = { 'Authorization': `Bearer ${JSON.parse(userData).accessToken}` };
     if (file.isBlacklisted) {
-      await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/files/blacklist/' + file.hashSum + '/remove', {}, {headers})
+      await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/files/blacklist/' + file.hashSum + '/remove', {}, {headers}) // Remove file from blacklist if it is already blacklisted
       .then(res => {  
         file.isBlacklisted = false;
       })
@@ -37,7 +37,7 @@ export default function FilesFilter({file, updateFiles}) {
         console.error(err);
       });
     } else {
-      await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/files/blacklist/' + file.hashSum + '/add', {}, {headers})
+      await axios.post(process.env.NEXT_PUBLIC_BACKEND_URL + '/panel/files/blacklist/' + file.hashSum + '/add', {}, {headers}) // Add file to blacklist if it is not already blacklisted
       .then(res => {  
         file.isBlacklisted = true;
       })

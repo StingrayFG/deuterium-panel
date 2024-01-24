@@ -21,7 +21,7 @@ export default function StatusPage({}) {
   const [status, setStatus] = useState();
   const [time, setTime] = useState(0);
 
-  useEffect(() => {
+  useEffect(() => { // Count the time since the page got rendered
     let interval = null;
     interval = setInterval(() => {
       setTime((time) => time + 1);
@@ -29,7 +29,7 @@ export default function StatusPage({}) {
     return () => clearInterval(interval);
   })
 
-  useEffect(() => {
+  useEffect(() => { // Get status
     if (userData && (!status)) {
 
       const headers = { 'Authorization': `Bearer ${JSON.parse(userData).accessToken}` };
@@ -45,7 +45,7 @@ export default function StatusPage({}) {
   });
 
   if (userData) {
-    if (!isFailed && !status) {
+    if (!isFailed && !status) { // If request succeeded
       return (
         <div className='w-full md:w-4/5 pt-16 md:pt-24 pb-20 ml-auto'> 
           <div className='h-auto ml-2 md:ml-12 mr-2 md:mr-6 pb-12
@@ -59,7 +59,7 @@ export default function StatusPage({}) {
         </div>
       ) 
     }
-    if (isFailed) {
+    if (isFailed) { // If request failed
       return (
         <div className='w-full md:w-4/5 pt-16 md:pt-24 pb-20 ml-auto'> 
           <div className='h-auto ml-2 md:ml-12 mr-2 md:mr-6 pb-12
@@ -74,7 +74,7 @@ export default function StatusPage({}) {
         </div>
       ) 
     } else if (status) {
-      date.setSeconds(+status.uptime + +time); 
+      date.setSeconds(+status.uptime + +time); // Add time since the page got rendered to the fetched uptime to get the actual uptime
       return (
         <div className='w-full md:w-4/5 pt-16 md:pt-24 pb-20 ml-auto'> 
           <div className='h-auto ml-2 md:ml-12 mr-2 md:mr-6 pb-12
