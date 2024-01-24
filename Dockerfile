@@ -15,7 +15,7 @@ COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
 ENV NEXT_TELEMETRY_DISABLED 1
-ENV NEXT_PUBLIC_BACKEND_URL https://h2cloud.space/backend
+ENV NEXT_PUBLIC_BACKEND_URL https://79.110.52.34:443/backend
 ENV PORT 3413
 
 RUN npm run build
